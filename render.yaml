@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: nps-plan-accion
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ADMIN_KEY
+        sync: false
+    # NOTA: el plan "free" de Render tiene disco efimero -- el archivo SQLite
+    # se puede perder en un redeploy o reinicio del servicio. Para 2 tiendas
+    # y volumen chico de texto puede alcanzar igual, pero si se quiere
+    # persistencia garantizada hay que subir a un plan con disco persistente
+    # y agregar aca una seccion "disk:" apuntando a /app (ver docs de Render).
